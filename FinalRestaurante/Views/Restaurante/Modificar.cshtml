@@ -1,0 +1,30 @@
+﻿@model FinalRestaurante.Models.Restaurante
+@{
+    ViewBag.Title = "Modificar";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Modificar</title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <h1>Modificar Pedido</h1>
+    <table>
+
+        @using (Html.BeginForm())
+        {
+            <tr><td>Ingrese N° de Pedido a Modificar: </td><td>@Html.TextBoxFor(R => R.pedido.IdPedido)</td></tr>
+            <tr><td>Descripción</td><td>@Html.TextBoxFor(R => R.pedido.Descripcion)</td></tr>
+            <tr><td>Mozo</td><td>@Html.DropDownListFor(R => R.pedido.IdMozo, new SelectList(Model.nombreMozo, "idMozo", "nombre"), "Seleccione")</td></tr>
+            <tr><td>Importe</td><td>@Html.TextBoxFor(R => R.pedido.Importe)</td></tr>
+            <tr><td></td><td><input type="submit" value="Modificar" /></td></tr>
+        }
+    </table>
+
+    @Html.ActionLink("Volver", "Index")
+</body>
+</html>
+

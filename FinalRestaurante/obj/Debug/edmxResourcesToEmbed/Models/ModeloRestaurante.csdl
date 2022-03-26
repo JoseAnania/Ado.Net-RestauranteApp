@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RestauranteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Mozo">
+    <Key>
+      <PropertyRef Name="idMozo" />
+    </Key>
+    <Property Name="idMozo" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Pedido" Relationship="Self.FK_Pedido_Mozo" FromRole="Mozo" ToRole="Pedido" />
+  </EntityType>
+  <EntityType Name="Pedido">
+    <Key>
+      <PropertyRef Name="idPedido" />
+    </Key>
+    <Property Name="idPedido" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="idMozo" Type="Int32" />
+    <Property Name="importe" Type="Double" />
+    <NavigationProperty Name="Mozo" Relationship="Self.FK_Pedido_Mozo" FromRole="Pedido" ToRole="Mozo" />
+  </EntityType>
+  <Association Name="FK_Pedido_Mozo">
+    <End Role="Mozo" Type="Self.Mozo" Multiplicity="0..1" />
+    <End Role="Pedido" Type="Self.Pedido" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mozo">
+        <PropertyRef Name="idMozo" />
+      </Principal>
+      <Dependent Role="Pedido">
+        <PropertyRef Name="idMozo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="RestauranteEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Mozo" EntityType="Self.Mozo" />
+    <EntitySet Name="Pedido" EntityType="Self.Pedido" />
+    <AssociationSet Name="FK_Pedido_Mozo" Association="Self.FK_Pedido_Mozo">
+      <End Role="Mozo" EntitySet="Mozo" />
+      <End Role="Pedido" EntitySet="Pedido" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

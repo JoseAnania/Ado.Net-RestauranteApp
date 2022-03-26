@@ -1,0 +1,26 @@
+﻿@using FinalRestaurante.Models
+@{
+    ViewBag.Title = "Reporte";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Reporte</title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <h1>Reporte 01</h1>
+
+
+
+        Sumatoria de Pedidos: @ViewData["total"]
+
+    <br />
+
+
+    @Html.ActionLink("Volver", "Index")
+</body>
+</html>
+

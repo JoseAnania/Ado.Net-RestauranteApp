@@ -1,0 +1,29 @@
+﻿@using FinalRestaurante.Models
+@{
+    ViewBag.Title = "Listar";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Listar</title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <h1>Listar Pedidos</h1>
+    <table border="1">
+
+        <tr><th>N° de Pedido</th><th>Descripción</th><th>Mozo</th><th>Importe</th></tr>
+
+        @foreach (PedidoDto P in Model)
+        {
+            <tr><td>@P.IdPedido</td><td>@P.Descripcion</td><td>@P.Nombre</td><td>@P.Importe</td></tr>
+        }
+    </table>
+
+    @Html.ActionLink("Volver", "Index")
+</body>
+</html>
+
+

@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RestauranteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Mozo">
+    <Key>
+      <PropertyRef Name="idMozo" />
+    </Key>
+    <Property Name="idMozo" Type="int" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Pedido">
+    <Key>
+      <PropertyRef Name="idPedido" />
+    </Key>
+    <Property Name="idPedido" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="descripcion" Type="varchar" MaxLength="50" />
+    <Property Name="idMozo" Type="int" />
+    <Property Name="importe" Type="float" />
+  </EntityType>
+  <Association Name="FK_Pedido_Mozo">
+    <End Role="Mozo" Type="Self.Mozo" Multiplicity="0..1" />
+    <End Role="Pedido" Type="Self.Pedido" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mozo">
+        <PropertyRef Name="idMozo" />
+      </Principal>
+      <Dependent Role="Pedido">
+        <PropertyRef Name="idMozo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="RestauranteModelStoreContainer">
+    <EntitySet Name="Mozo" EntityType="Self.Mozo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Pedido" EntityType="Self.Pedido" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Pedido_Mozo" Association="Self.FK_Pedido_Mozo">
+      <End Role="Mozo" EntitySet="Mozo" />
+      <End Role="Pedido" EntitySet="Pedido" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
